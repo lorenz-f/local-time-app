@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import Clock from "react-live-clock";
 
 export default function Home() {
-  
+
   const [quoteVisible, setQuoteVisible] = useState(false);
   const [quote, setQuote] = useState("");
   const [refresh, setRefresh] = useState(false);
@@ -62,7 +62,7 @@ export default function Home() {
         }`}
       >
         <div
-          className={`${quotePosition} order-1 w-full h-[25%] transition-all duration-700 ease-in ${
+          className={`${quotePosition} order-1 w-full h-[25%] transition-all duration-300 ease-out ${
             quoteVisible
               ? "opacity-0"
               : focusQuote

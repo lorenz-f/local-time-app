@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import Clock from "react-live-clock";
 
 export default function Home() {
- 
-  const [militaryTime, setMilitaryTime] = useState(true);
+  
+  const [quoteVisible, setQuoteVisible] = useState(false);
   const [quote, setQuote] = useState("");
   const [refresh, setRefresh] = useState(false);
   const [greeting, setGreeting] = useState("");
@@ -62,22 +62,27 @@ export default function Home() {
         }`}
       >
         <div
-          className={`${quotePosition} order-1 w-full h-[25%] transition-all duration-300 ease-out ${
-            focusQuote ? "" : expanded ? "blur-sm" : ""
+          className={`${quotePosition} order-1 w-full h-[25%] transition-all duration-700 ease-in ${
+            quoteVisible
+              ? "opacity-0"
+              : focusQuote
+              ? ""
+              : expanded
+              ? "blur-sm"
+              : ""
           }`}
         >
           <div
             className={`${
               quotePosition == "px-[25%]"
-                ? "items-center"
+                ? " "
                 : quotePosition == "pr-[50%]"
-                ? "items-start"
-                : "items-end"
-            } font-playfairDisplay order-1 space-y-8 flex flex-col text-3xl`}
+                ? " "
+                : " "
+            } font-playfairDisplay w-full order-1 space-y-8 flex flex-col text-3xl`}
           >
-            {/* create right-align vs center align vs left based on selection */}
             <p>{quote.content}</p>
-            <p className=" font-bold text-2xl">- {quote.author}</p>
+            <p className="font-bold  text-2xl">- {quote.author}</p>
             <svg
               onClick={() => setRefresh(true)}
               className="scale-75"
@@ -221,25 +226,43 @@ export default function Home() {
           onMouseLeave={() => setFocusQuote(false)}
           className="flex flex-col items-center border-l border-black w-[25%] mt-[1.5%] mb-[5%] font-playfairDisplay text-3xl"
         >
+          <h1 className="font-bold">Quote</h1>
+          <div
+            onClick={() => setQuoteVisible(!quoteVisible)}
+            className="flex flex-row mt-[9.5%] mb-0 hover:cursor-pointer hover:font-bold"
+          >
+            {!quoteVisible ? "On" : "Off"}
+          </div>
+        </div>
+        <div
+          onMouseEnter={() => setFocusQuote(true)}
+          onMouseLeave={() => setFocusQuote(false)}
+          className="flex flex-col items-center border-l border-black w-[25%] mt-[1.5%] mb-[5%] font-playfairDisplay text-3xl"
+        >
           <h1 className="font-bold">Quote Placement</h1>
           <ul className="flex flex-row mt-[10%] space-x-8">
-            <li onClick={() => setQuotePosition("pr-[50%]")}>Left</li>
+            <button
+              className="hover:cursor-pointer hover:font-bold"
+              onClick={() => setQuotePosition("pr-[50%]")}
+            >
+              Left
+            </button>
             <div className="border-l border-black" />
-            <li onClick={() => setQuotePosition("px-[25%]")}>Center</li>
+            <button
+              className="hover:cursor-pointer hover:font-bold"
+              onClick={() => setQuotePosition("px-[25%]")}
+            >
+              Center
+            </button>
             <div className="border-l border-black" />
-            <li onClick={() => setQuotePosition("pl-[50%]")}>Right</li>
+            <button
+              className="hover:cursor-pointer hover:font-bold"
+              onClick={() => setQuotePosition("pl-[50%]")}
+            >
+              Right
+            </button>
           </ul>
         </div>
-        <div className="flex flex-col items-center border-l border-black w-[25%] mt-[1.5%] mb-[5%] font-playfairDisplay text-3xl">
-          <h1 className="font-bold">Military Time</h1>
-          <div className = "flex flex-row mt-[9.5%] mb-0">
-             
-              {militaryTime ? "On" : "Off"}
-             
-          </div>
-        </div> 
-        {/* consider 2xl on these */}
-        
       </div>
     </>
   );

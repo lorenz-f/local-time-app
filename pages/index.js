@@ -3,17 +3,17 @@ import Clock from "react-live-clock";
 
 export default function Home() {
 
+
   const [quoteVisible, setQuoteVisible] = useState(false);
   const [quote, setQuote] = useState("");
   const [refresh, setRefresh] = useState(false);
-  const [greeting, setGreeting] = useState("");
   const [locationData, setLocationData] = useState("");
   const [hover, setHover] = useState(false);
   const [expanded, setExpanded] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [focusQuote, setFocusQuote] = useState(false);
   const [quotePosition, setQuotePosition] = useState("px-[25%]");
-  const [quoteAlign, setQuoteAlign] = useState("");
+
+  {/* setting variables intended to return various items from the Date object */}
 
   let time = new Date().toString();
   let dayOfWeek = new Date().getDay();
@@ -21,6 +21,8 @@ export default function Home() {
   let month = new Date().getMonth();
   let year = new Date().getFullYear();
   let hours = parseInt(time.slice(16, 18));
+
+  {/* API call to fetch the user's location */}
 
   useEffect(() => {
     async function locationCall() {
@@ -31,16 +33,19 @@ export default function Home() {
     locationCall();
   }, []);
 
+  {/* API call to quote generator */}
+
   useEffect(() => {
     async function apiCall() {
       const res = await fetch("https://api.quotable.io/random");
       const quote = await res.json();
       setQuote(quote);
       console.log(quote);
-      console.log("i fire once");
     }
     apiCall();
   }, []);
+
+  {/* separate API handler for additional fetches based on the user refreshing the page */}
 
   useEffect(() => {
     if (refresh) {
@@ -61,6 +66,9 @@ export default function Home() {
           expanded ? "backdrop-blur-sm" : ""
         }`}
       >
+
+        {/* checks whether the quote generator is hidden from the page or not before dispatching a style change */}
+
         <div
           className={`${quotePosition} order-1 w-full h-[25%] transition-all duration-300 ease-out ${
             quoteVisible
@@ -82,7 +90,7 @@ export default function Home() {
             } font-playfairDisplay w-full order-1 space-y-8 flex flex-col text-3xl`}
           >
             <p>{quote.content}</p>
-            <p className="font-bold  text-2xl">- {quote.author}</p>
+            <p className="font-bold text-2xl">- {quote.author}</p>
             <svg
               onClick={() => setRefresh(true)}
               className="scale-75"
@@ -96,7 +104,7 @@ export default function Home() {
         </div>
 
         <div
-          className={`flex flex-row  order-2 transition-all duration-300 ease-out ${
+          className={`flex flex-row order-2 transition-all duration-300 ease-out ${
             expanded ? "h-[50%]" : "h-[75%]"
           }  w-full`}
         >
@@ -107,7 +115,10 @@ export default function Home() {
                 : "text-[#FFB6C1]"
             }`}
           >
-            <div className=" text-[30px]  ">
+
+            {/* checks time and dispatches a relevant greeting */}
+
+            <div className="text-[30px]">
               {hours < 12
                 ? "Good morning"
                 : hours >= 12 && hours < 17

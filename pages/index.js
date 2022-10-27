@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import Clock from "react-live-clock";
 
 export default function Home() {
-
-
   const [quoteVisible, setQuoteVisible] = useState(false);
   const [quote, setQuote] = useState("");
   const [refresh, setRefresh] = useState(false);
@@ -13,7 +11,9 @@ export default function Home() {
   const [focusQuote, setFocusQuote] = useState(false);
   const [quotePosition, setQuotePosition] = useState("px-[25%]");
 
-  {/* setting variables intended to return various items from the Date object */}
+  {
+    /* setting variables intended to return various items from the Date object */
+  }
 
   let time = new Date().toString();
   let dayOfWeek = new Date().getDay();
@@ -22,7 +22,9 @@ export default function Home() {
   let year = new Date().getFullYear();
   let hours = parseInt(time.slice(16, 18));
 
-  {/* API call to fetch the user's location */}
+  {
+    /* API call to fetch the user's location */
+  }
 
   useEffect(() => {
     async function locationCall() {
@@ -33,7 +35,9 @@ export default function Home() {
     locationCall();
   }, []);
 
-  {/* API call to quote generator */}
+  {
+    /* API call to quote generator */
+  }
 
   useEffect(() => {
     async function apiCall() {
@@ -45,7 +49,9 @@ export default function Home() {
     apiCall();
   }, []);
 
-  {/* separate API handler for additional fetches based on the user refreshing the page */}
+  {
+    /* separate API handler for additional fetches based on the user refreshing the page */
+  }
 
   useEffect(() => {
     if (refresh) {
@@ -66,7 +72,6 @@ export default function Home() {
           expanded ? "backdrop-blur-sm" : ""
         }`}
       >
-
         {/* checks whether the quote generator is hidden from the page or not before dispatching a style change */}
 
         <div
@@ -80,6 +85,8 @@ export default function Home() {
               : ""
           }`}
         >
+          {/* checking user-selected position to determine quote alignment */}
+
           <div
             className={`${
               quotePosition == "px-[25%]"
@@ -89,8 +96,12 @@ export default function Home() {
                 : " "
             } font-playfairDisplay w-full order-1 space-y-8 flex flex-col text-3xl`}
           >
+
             <p>{quote.content}</p>
             <p className="font-bold text-2xl">- {quote.author}</p>
+
+            {/* controls the refresh state */}
+
             <svg
               onClick={() => setRefresh(true)}
               className="scale-75"
@@ -104,9 +115,9 @@ export default function Home() {
         </div>
 
         <div
-          className={`flex flex-row order-2 transition-all duration-300 ease-out ${
+          className={`flex flex-row order-2 transition-all duration-300 ease-out w-full ${
             expanded ? "h-[50%]" : "h-[75%]"
-          }  w-full`}
+          }`}
         >
           <div
             className={`order-2 flex-col flex transition-all duration-300 ease-out self-end ${
@@ -115,8 +126,7 @@ export default function Home() {
                 : "text-[#FFB6C1]"
             }`}
           >
-
-            {/* checks time and dispatches a relevant greeting */}
+            {/* checks time local to the user and dispatches a relevant greeting */}
 
             <div className="text-[30px]">
               {hours < 12
@@ -145,6 +155,8 @@ export default function Home() {
               </div>
             </div>
           </div>
+
+          {/* deals with the "more" expansion button in the UI, determines whether the bottom nav bar is displayed or hidden */}
 
           <button
             type="button"
@@ -190,6 +202,7 @@ export default function Home() {
       >
         <div className=" w-[50%] py-12 px-20 font-playfairDisplay">
           <h1 className=" text-3xl">
+            {/* assign a string value based on returned */}
             {dayOfWeek == 6
               ? "Saturday"
               : dayOfWeek == 5
@@ -250,6 +263,8 @@ export default function Home() {
           onMouseLeave={() => setFocusQuote(false)}
           className="flex flex-col items-center border-l border-black w-[25%] mt-[1.5%] mb-[5%] font-playfairDisplay text-3xl"
         >
+          {/* quote placement selector for left, center and right */}
+
           <h1 className="font-bold">Quote Placement</h1>
           <ul className="flex flex-row mt-[10%] space-x-8">
             <button

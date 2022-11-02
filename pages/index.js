@@ -195,6 +195,8 @@ export default function Home() {
         </div>
       </div>
 
+      {/* bottom navbar module */}
+
       <div
         className={`${
           expanded ? "mt-[-12%]" : "mt-0"
@@ -202,7 +204,7 @@ export default function Home() {
       >
         <div className=" w-[50%] py-12 px-20 font-playfairDisplay">
           <h1 className=" text-3xl">
-            {/* assign a string value based on returned */}
+            {/* assign a string value based on returned integer of zero-index week array */}
             {dayOfWeek == 6
               ? "Saturday"
               : dayOfWeek == 5
@@ -218,7 +220,7 @@ export default function Home() {
               : "Sunday"}
             ,
           </h1>
-          <p className="text-8xl px-10">
+          <p className="text-8xl px-4">
             {month == 11
               ? "December"
               : month == 10
@@ -251,6 +253,9 @@ export default function Home() {
           className="flex flex-col items-center border-l border-black w-[25%] mt-[1.5%] mb-[5%] font-playfairDisplay text-3xl"
         >
           <h1 className="font-bold">Quote</h1>
+
+          {/* quote visibility setter */}
+
           <div
             onClick={() => setQuoteVisible(!quoteVisible)}
             className="flex flex-row mt-[9.5%] mb-0 hover:cursor-pointer hover:font-bold"

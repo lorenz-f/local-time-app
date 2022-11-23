@@ -199,11 +199,11 @@ export default function Home() {
 
       <div
         className={`${
-          expanded ? "mt-[-12%]" : "mt-0"
-        } absolute flex flex-row bg-gray-300 opacity-90 transition-all duration-300 ease-out h-[300px] w-screen`}
+          expanded ? "mt-[-23vh]" : ""
+        }   flex flex-row bg-gray-300 opacity-80 transition-all duration-300 h-56 ease-out `}
       >
-        <div className=" w-[50%] py-12 px-20 font-playfairDisplay">
-          <h1 className=" text-3xl">
+        <div className="flex flex-col w-[50%] py-12 px-20 m-auto font-playfairDisplay">
+          <h1 className="ml-12 text-3xl">
             {/* assign a string value based on returned integer of zero-index week array */}
             {dayOfWeek == 6
               ? "Saturday"
@@ -220,7 +220,7 @@ export default function Home() {
               : "Sunday"}
             ,
           </h1>
-          <p className="text-8xl px-4">
+          <p className="text-7xl self-center px-4">
             {month == 11
               ? "December"
               : month == 10
@@ -250,7 +250,7 @@ export default function Home() {
         <div
           onMouseEnter={() => setFocusQuote(true)}
           onMouseLeave={() => setFocusQuote(false)}
-          className="flex flex-col items-center border-l border-black w-[25%] mt-[1.5%] mb-[5%] font-playfairDisplay text-3xl"
+          className="flex flex-col items-center border-l border-black w-[25%] m-auto font-playfairDisplay text-3xl"
         >
           <h1 className="font-bold">Quote</h1>
 
@@ -266,12 +266,13 @@ export default function Home() {
         <div
           onMouseEnter={() => setFocusQuote(true)}
           onMouseLeave={() => setFocusQuote(false)}
-          className="flex flex-col items-center border-l border-black w-[25%] mt-[1.5%] mb-[5%] font-playfairDisplay text-3xl"
+          className="flex flex-col items-center border-l border-black w-[25%] m-auto font-playfairDisplay text-3xl"
         >
+          
           {/* quote placement selector for left, center and right */}
 
           <h1 className="font-bold">Quote Placement</h1>
-          <ul className="flex flex-row mt-[10%] space-x-8">
+          <ul className="flex flex-row mt-[10%] gap-[2vw]">
             <button
               className="hover:cursor-pointer hover:font-bold"
               onClick={() => setQuotePosition("pr-[50%]")}

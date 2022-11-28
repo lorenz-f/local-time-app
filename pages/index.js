@@ -10,7 +10,7 @@ export default function Home() {
   const [expanded, setExpanded] = useState(false);
   const [focusQuote, setFocusQuote] = useState(false);
   const [quotePosition, setQuotePosition] = useState("px-[25%]");
-  const [small, setSmall] = useState(false);
+
   {
     /* setting variables intended to return various items from the Date object */
   }
@@ -38,7 +38,7 @@ export default function Home() {
   {
     /* API call to quote generator */
   }
- /*
+
   useEffect(() => {
     async function apiCall() {
       const res = await fetch("https://api.quotable.io/random");
@@ -48,7 +48,7 @@ export default function Home() {
     }
     apiCall();
   }, []);
-*/
+
   {
     /* separate API handler for additional fetches based on the user refreshing the page */
   }
@@ -64,7 +64,7 @@ export default function Home() {
       refreshCall();
     }
   }, [refresh]);
- 
+
   return (
     <>
       <div
@@ -115,14 +115,14 @@ export default function Home() {
 
         <div
           className={`flex flex-row order-2 transition-all duration-300 ease-out w-full ${
-            expanded ? "h-[50%] sm:h-[28%]" : "h-[75%]"
+            expanded ? "h-[50%] sm:h-[40%]" : "h-[75%]"
           }`}
         >
           <div
             className={`order-2 flex-col flex transition-all duration-300 ease-out self-end ${
               expanded
-                ? "text-transparent bg-clip-text bg-gradient-to-b from-[#312E81] to-[#FFB6C1] sm:from-[#FFB6C1] sm:to-[#312E81]"
-                : "text-[#FFB6C1] sm:text-[#312E81]"
+                ? "text-transparent bg-clip-text bg-gradient-to-b from-[#312E81] to-[#FFB6C1] sm:from-[#FFB6C1] sm:to-[#312E81] "
+                  : "text-[#FFB6C1] sm:text-[#312E81]"
             }`}
           >
             {/* checks time local to the user and dispatches a relevant greeting */}
@@ -145,7 +145,8 @@ export default function Home() {
             <div className="flex flex-row mt-[-75px]">
               <svg xmlns="http://www.w3.org/2000/svg" height="48" width="48">
                 <path
-                  fill={`#FFB6C1 `}
+                  className = "sm:opacity-0"
+                  fill="#FFB6C1"
                   d="M24 23.5q1.45 0 2.475-1.025Q27.5 21.45 27.5 20q0-1.45-1.025-2.475Q25.45 16.5 24 16.5q-1.45 0-2.475 1.025Q20.5 18.55 20.5 20q0 1.45 1.025 2.475Q22.55 23.5 24 23.5ZM24 44q-8.05-6.85-12.025-12.725Q8 25.4 8 20.4q0-7.5 4.825-11.95Q17.65 4 24 4q6.35 0 11.175 4.45Q40 12.9 40 20.4q0 5-3.975 10.875T24 44Z"
                 />
               </svg>
@@ -198,11 +199,11 @@ export default function Home() {
 
       <div
         className={`${
-          expanded ? "mt-[-22vh] sm:mt-[-44vh]" : ""
-        }   flex flex-row sm:flex-col bg-gray-300 opacity-80 transition-all duration-300 h-[22vh] sm:h-[44vh] ease-out `}
+          expanded ? "mt-[-22vh] sm:mt-[-33vh]" : ""
+        }   flex flex-row sm:flex-col bg-gray-300 opacity-80 transition-all duration-300 h-[22vh] sm:h-[33vh] ease-out `}
       >
-        <div className="flex flex-col sm:flex-row w-[50%] py-12 px-[3vw] sm:py-0  m-auto sm:m-0 font-playfairDisplay">
-          <h1 className=" text-3xl sm:text-5xl">
+        <div className="flex flex-col sm:flex-row w-[50%] py-12 px-[3vw] sm:py-0  m-auto font-playfairDisplay">
+          <h1 className=" text-3xl">
             {/* assign a string value based on returned integer of zero-index week array */}
             {dayOfWeek == 6
               ? "Saturday"
@@ -219,7 +220,7 @@ export default function Home() {
               : "Sunday"}
             ,
           </h1>
-          <p className="text-7xl md:text-6xl sm:text-5xl self-center sm:border-8 ">
+          <p className="text-7xl md:text-6xl items-center">
             {month == 11
               ? "December"
               : month == 10

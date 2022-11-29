@@ -68,7 +68,7 @@ export default function Home() {
   return (
     <>
       <div
-        className={`flex flex-col w-screen h-screen px-36 pt-20 pb-10 sm:p-4 transition-all duration-300 ease-out ${
+        className={`flex flex-col w-screen h-screen px-36 pt-20 pb-10 sm:p-4 xs:p-1 transition-all duration-300 ease-out ${
           expanded ? "backdrop-blur-sm" : ""
         }`}
       >
@@ -136,7 +136,7 @@ export default function Home() {
               , it's
             </div>
             <Clock
-              className="text-[220px] mt-[-80px] text-left"
+              className="text-[220px]  border-8 mt-[-80px] text-left"
               format={"HH:mm"}
               ticking={true}
               timezone={locationData.timezone}
@@ -150,7 +150,7 @@ export default function Home() {
                   d="M24 23.5q1.45 0 2.475-1.025Q27.5 21.45 27.5 20q0-1.45-1.025-2.475Q25.45 16.5 24 16.5q-1.45 0-2.475 1.025Q20.5 18.55 20.5 20q0 1.45 1.025 2.475Q22.55 23.5 24 23.5ZM24 44q-8.05-6.85-12.025-12.725Q8 25.4 8 20.4q0-7.5 4.825-11.95Q17.65 4 24 4q6.35 0 11.175 4.45Q40 12.9 40 20.4q0 5-3.975 10.875T24 44Z"
                 />
               </svg>
-              <div className="b-[400px] text-[30px] tracking-wider uppercase">
+              <div className="b-[400px] text-[30px] ml-[-4vw] tracking-wider uppercase">
                 {locationData.city}, {locationData.region}
               </div>
             </div>
@@ -200,10 +200,10 @@ export default function Home() {
       <div
         className={`${
           expanded ? "mt-[-22vh] sm:mt-[-33vh]" : ""
-        }   flex flex-row sm:flex-col bg-gray-300 opacity-80 transition-all duration-300 h-[22vh] sm:h-[33vh] ease-out `}
+        }   flex flex-row bg-gray-300 opacity-80 transition-all duration-300 h-[22vh] sm:h-[33vh] ease-out `}
       >
-        <div className="flex flex-col sm:flex-row w-[50%] py-12 px-[3vw] sm:py-0  m-auto font-playfairDisplay">
-          <h1 className=" text-3xl">
+        <div className="flex flex-col sm:flex-col items-center sm:justify-center w-[50%] sm:w-[33%] xs:w-[33%] sm:h-[100%] py-12  px-[3vw] sm:py-0 m-auto sm:m-0 font-playfairDisplay">
+          <h1 className="xs:hidden text-3xl">
             {/* assign a string value based on returned integer of zero-index week array */}
             {dayOfWeek == 6
               ? "Saturday"
@@ -220,7 +220,10 @@ export default function Home() {
               : "Sunday"}
             ,
           </h1>
-          <p className="text-7xl md:text-6xl items-center">
+          <h1 className = "hidden xs:">
+
+          </h1>
+          <p className="text-7xl md:text-6xl sm:text-5xl xs:text-sm">
             {month == 11
               ? "December"
               : month == 10
@@ -246,11 +249,12 @@ export default function Home() {
               : "January"}{" "}
             {dayOfMonth}, {year}
           </p>
+          <p className = "">{dayOfMonth + 1}</p>
         </div>
         <div
           onMouseEnter={() => setFocusQuote(true)}
           onMouseLeave={() => setFocusQuote(false)}
-          className="flex flex-col items-center border-l border-black w-[25%] m-auto my-[4vh] font-playfairDisplay text-3xl"
+          className="flex flex-col items-center   border-l   border-black w-[25%] sm:w-[33%] m-auto my-[4vh] font-playfairDisplay xs:text-xl text-3xl"
         >
           <h1 className="font-bold">Quote</h1>
 
@@ -258,7 +262,7 @@ export default function Home() {
 
           <div
             onClick={() => setQuoteVisible(!quoteVisible)}
-            className="flex flex-row py-[5vh] mb-0 hover:cursor-pointer hover:font-bold"
+            className="flex flex-row py-[5vh] sm:py-[5vh] mb-0 sm:m-auto hover:cursor-pointer hover:font-bold"
           >
             {!quoteVisible ? "On" : "Off"}
           </div>
@@ -266,12 +270,12 @@ export default function Home() {
         <div
           onMouseEnter={() => setFocusQuote(true)}
           onMouseLeave={() => setFocusQuote(false)}
-          className="flex flex-col items-center border-l border-black w-[25%]  my-[4vh] font-playfairDisplay text-3xl"
+          className="flex flex-col items-center border-l border-black w-[25%] sm:w-[33%] my-[4vh] font-playfairDisplay xs:text-xl text-3xl"
         >
           {/* quote placement selector for left, center and right */}
-            <div className = "flex flex-col items-center ">
+            <div className = "flex flex-col items-center">
           <h1 className="font-bold">Quote Placement</h1>
-          <ul className="flex flex-row gap-[2vw] md:gap-[1.3vw] py-[5vh]">
+          <ul className="flex flex-row sm:flex-col gap-[2vh] md:gap-[1.3vh] sm:gap-[1.4vh] py-[5vh] sm:py-[3vh]">
             <button
               className="hover:cursor-pointer hover:font-bold"
               onClick={() => setQuotePosition("pr-[50%]")}

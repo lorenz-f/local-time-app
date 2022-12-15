@@ -1,5 +1,11 @@
-App utilizing NextJS and TailwindCSS, intended to present an easy-on-the-eyes UI/UX.
+# Local Time App
 
-This project allowed me to seriously hone my CSS transition skills as well as take an opportunity to develop the aforementioned easygoing presentation of the overall site.
+An application that displays a generated quote in addition to the user's local time. Launched with NextJS and Tailwind, developed with "easy-on-the-eyes" UI and seamlessness of experience in mind.\
+This app makes calls to the [Quotable API](https://api.quotable.io) and utilizes the [react-live-clock package](https://www.npmjs.com/package/react-live-clock).
 
-Utilizes the react-live-clock package.
+## Installation 
+
+To install/run this project, run:
+
+    npm i
+    npm run dev

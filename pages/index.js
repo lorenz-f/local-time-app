@@ -65,6 +65,10 @@ export default function Home() {
     }
   }, [refresh]);
 
+  useEffect(() => {
+
+  })
+
   return (
     <>
       <div
@@ -136,7 +140,7 @@ export default function Home() {
               , it's
             </div>
             <Clock
-              className="text-[220px]  border-8 mt-[-80px] text-left"
+              className="text-[220px]  mt-[-80px] text-left"
               format={"HH:mm"}
               ticking={true}
               timezone={locationData.timezone}
@@ -150,7 +154,7 @@ export default function Home() {
                   d="M24 23.5q1.45 0 2.475-1.025Q27.5 21.45 27.5 20q0-1.45-1.025-2.475Q25.45 16.5 24 16.5q-1.45 0-2.475 1.025Q20.5 18.55 20.5 20q0 1.45 1.025 2.475Q22.55 23.5 24 23.5ZM24 44q-8.05-6.85-12.025-12.725Q8 25.4 8 20.4q0-7.5 4.825-11.95Q17.65 4 24 4q6.35 0 11.175 4.45Q40 12.9 40 20.4q0 5-3.975 10.875T24 44Z"
                 />
               </svg>
-              <div className="b-[400px] text-[30px] ml-[-4vw] tracking-wider uppercase">
+              <div className="text-3xl mt-1.5 tracking-wider uppercase">
                 {locationData.city}, {locationData.region}
               </div>
             </div>
@@ -249,12 +253,16 @@ export default function Home() {
               : "January"}{" "}
             {dayOfMonth}, {year}
           </p>
-          <p className = "">{dayOfMonth + 1}</p>
+          {/* no recollection as to why i left this in:
+          
+           <p className = "">{dayOfMonth + 1}</p>
+    
+          */}
         </div>
         <div
           onMouseEnter={() => setFocusQuote(true)}
           onMouseLeave={() => setFocusQuote(false)}
-          className="flex flex-col items-center   border-l   border-black w-[25%] sm:w-[33%] m-auto my-[4vh] font-playfairDisplay xs:text-xl text-3xl"
+          className="flex flex-col items-center border-l border-black w-[25%] sm:w-[33%] m-auto my-[4vh] font-playfairDisplay xs:text-xl text-3xl"
         >
           <h1 className="font-bold">Quote</h1>
 

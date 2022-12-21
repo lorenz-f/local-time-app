@@ -9,9 +9,13 @@ module.exports = {
       montserrat: ["Montserrat", "sans-serif"],
       playfairDisplay: ["Playfair Display", "serif"]
     },
-    extend: {
-
-    },
+    screens: {
+      /* sub 1200px is treated as mobile/tablet */
+      'xxs': {'max': '499px'},
+      'xs': {'max': '899px'},
+      'sm': {'max': '1199px'},
+      'md': {'max': '1599px'}
+    }
   },
   plugins: [],
 }

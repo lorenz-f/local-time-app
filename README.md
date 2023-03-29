@@ -1,21 +1,19 @@
 # Local Time App
 
-A dashboard-like app displaying the user's time in a pleasantly-colored gradient. 
-
-Quotes are fetched on refresh and on command from an API, and can be toggled in position and display - additionally, the user's date is rendered.
+A calmly-colored dashboard returning the user's local time and an on-screen quote - numerous opportunities for user interaction exist.
 
 ## Installation and Setup
 
-This project was launched with Next.js and TailwindCSS. [View the official setup 
+Launched with Next.js and TailwindCSS. [View the official setup 
 docs on the TailwindCSS website.](https://tailwindcss.com/docs/guides/nextjs)
 
 ## API used
 
-This project makes calls to the [Quotable API](https://www.datamuse.com/api/). No key is required.
+Makes calls to the [Quotable API](https://www.datamuse.com/api/). No key is required.
 
 ## Technologies used
 
-The following technologies and topics are covered:
+The following are covered:
 
 [Node.js](https://nodejs.org/en/)  
 [Next.js](https://nextjs.org/)  

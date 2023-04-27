@@ -11,9 +11,7 @@ export default function Home() {
   const [focusQuote, setFocusQuote] = useState(false);
   const [quotePosition, setQuotePosition] = useState("px-[25%]");
 
-  {
-    /* setting variables intended to return various items from the Date object */
-  }
+    /* setting variables intended to return various items from the Date object */ 
 
   let time = new Date().toString();
   let dayOfWeek = new Date().getDay();
@@ -21,11 +19,9 @@ export default function Home() {
   let month = new Date().getMonth();
   let year = new Date().getFullYear();
   let hours = parseInt(time.slice(16, 18));
-
-  {
-    /* API call to fetch the user's location */
-  }
-
+ 
+  setInterval(() => time.toLocaleTimeString, 1000); // refreshes rendered time each second
+  
   useEffect(() => {
     async function locationCall() {
       const res = await fetch("http://ip-api.com/json/");
@@ -35,10 +31,7 @@ export default function Home() {
     locationCall();
   }, []);
 
-  {
-    /* API call to quote generator */
-  }
-
+ 
   useEffect(() => {
     async function apiCall() {
       const res = await fetch("https://api.quotable.io/random");
@@ -48,36 +41,28 @@ export default function Home() {
     }
     apiCall();
   }, []);
-
-  {
-    /* separate API handler for additional fetches based on the user refreshing the page */
-  }
-
-  useEffect(() => {
-    if (refresh) {
+ 
+  useEffect(() => { 
       async function refreshCall() {
         const res = await fetch("https://api.quotable.io/random");
         const quote = await res.json();
         setQuote(quote);
         setRefresh(false);
       }
-      refreshCall();
-    }
+      refreshCall(); 
   }, [refresh]);
-
-  useEffect(() => {});
 
   return (
     <>
       <div
-        className={`sm:text-[#312E81] md:px-0 md:pt-10 md:pb-4 flex flex-col w-screen h-screen px-36 pt-20 pb-10 transition-all duration-300 ease-out ${
-          expanded ? "backdrop-blur-sm xs:mt-[5%]" : ""
+        className={`sm:text-[#312E81] sm:p-0 flex flex-col w-screen h-screen px-36 pt-20 pb-10 transition-all duration-300 ease-out ${
+          expanded ? "backdrop-blur-sm " : ""
         }`}
       >
-        {/* checks whether the quote generator is hidden from the page or not before dispatching a style change */}
-
+        
+        {/* handles quote visibility */}
         <div
-          className={`${quotePosition} xs:pt-40 xs:flex xs:flex-row order-0 w-full h-[25%] transition-all duration-300 ease-out ${
+          className={`${quotePosition} order-0 w-full h-[25%] transition-all duration-300 ease-out sm:py-16 ${
             quoteVisible
               ? "opacity-0"
               : focusQuote
@@ -87,8 +72,8 @@ export default function Home() {
               : ""
           }`}
         >
-          {/* checking user-selected position to determine quote alignment */}
 
+          {/* handles quote position */}
           <div
             className={`${
               quotePosition == "px-[25%]"
@@ -96,18 +81,19 @@ export default function Home() {
                 : quotePosition == "pr-[50%]"
                 ? " "
                 : " "
-            } xs:mt-12 font-playfairDisplay w-full order-1 space-y-8 flex flex-col text-3xl sm:text-lg`}
+            }  font-playfairDisplay w-full order-1 space-y-8 flex flex-col text-3xl sm:text-lg`}
           >
             <p>{quote.content}</p>
             <p
-              className={` items-center font-bold text-2xl xs:text-[#FFBC61] sm:text-lg`}
+              className={` items-center font-semibold text-2xl sm:text-lg`}
             >
               - {quote.author}
             </p>
 
+            {/* quote refresh button */}
             <svg
               onClick={() => setRefresh(true)}
-              className="scale-75 xs:hidden"
+              className="scale-75 sm:self-center cursor-pointer"
               xmlns="http://www.w3.org/2000/svg"
               height="48"
               width="48"
@@ -121,20 +107,20 @@ export default function Home() {
         </div>
 
         <div
-          className={`flex flex-row xs:block transition-all duration-300 ease-out justify-end w-full ${
-            expanded ? "h-[50%]" : "h-[75%]"
+          className={`flex flex-row sm:h-full sm:flex-col w-full ${
+            expanded ? "h-[50%]" : "h-[75%] sm:h-2/3"
           }`}
         >
           <div
-            className={`order-2 flex-col flex transition-all duration-300 ease-out self-end xs:items-center xs:justify-center ${
+            className={`order-2 flex-col flex transition-all duration-300 ease-out sm:space-y-0 sm:self-center self-end ${
               expanded
-                ? "text-transparent bg-clip-text bg-gradient-to-b from-[#312E81] to-[#FFB6C1] xs:to-[#312E81]"
-                : "text-[#FFB6C1] xs:text-[#312E81]"
+                ? "text-transparent bg-clip-text bg-gradient-to-b from-[#312E81] to-[#FFB6C1]"
+                : "text-[#FFB6C1]"
             }`}
           >
-            {/* checks time local to the user and dispatches a relevant greeting */}
-
-            <div className="text-3xl xs:hidden">
+             
+             {/* greets user based on time of day */}
+            <div className={`${expanded ? "sm:mt-24" : ""} text-3xl sm:mt-56 transition-all ease-in-out`}>
               {hours < 12
                 ? "Good morning"
                 : hours >= 12 && hours < 17
@@ -144,15 +130,14 @@ export default function Home() {
             </div>
 
             <Clock
-              className="xxs:text-[6rem]  text-[13.75rem] mt-[-5rem] xs:mt-[-15.5rem]"
+              className="text-[13.75rem] mt-[-5rem] sm:text-8xl sm:text-center sm:justify-center sm:items-center"
               format={"HH:mm"}
               ticking={true}
               timezone={locationData.timezone}
             />
 
             <div className="flex flex-row mt-[-4.688rem]">
-              <svg
-                className={`md:mt-1.5 xs:hidden`}
+              <svg 
                 xmlns="http://www.w3.org/2000/svg"
                 height="48"
                 width="48"
@@ -163,7 +148,7 @@ export default function Home() {
                 />
               </svg>
               <div
-                className={`xs:text-xl text-3xl mt-1.5 md:mt-10 tracking-wider uppercase`}
+                className={`text-3xl mt-1.5 tracking-wider uppercase`}
               >
                 {locationData.city}, {locationData.region}
               </div>
@@ -177,9 +162,7 @@ export default function Home() {
             onClick={() => setExpanded(!expanded)}
             onMouseEnter={() => setHover(true)}
             onMouseLeave={() => setHover(false)}
-            className={`${
-              expanded ? "xs:mt-[4vh]" : ""
-            } xs:mt-96 self-end ml-auto mr-0 order-3 w-64 xs:w-56 flex flex-row items-center justify-center text-[#FFB6C1] border-transparent border-4 text-4xl h-20 rounded-full hover:border-[#FFB6C1] hover:text-transparent hover:bg-[#FFB6C1] hover:text-[#312E81] transition-all`}
+            className={`${expanded ? "sm:mb-96" : "sm:mb-12"} self-end sm:mx-auto sm:mt-auto ml-auto mr-0 order-3 w-64 flex flex-row items-center justify-center text-[#FFB6C1] border-transparent border-4 text-4xl h-20 rounded-full hover:border-[#FFB6C1] hover:text-transparent hover:bg-[#FFB6C1] hover:text-[#312E81] `}
           >
             {expanded ? "LESS" : "MORE"}
             {hover ? (
@@ -215,15 +198,14 @@ export default function Home() {
 
       <div
         className={`${
-          expanded ? "mt-[-22vh] xs:mt-[-55vh] " : ""
-        }xs:w-screen flex flex-row xs:flex-col bg-gray-300 opacity-80 transition-all duration-300 xs:h-[66vh] ease-out`}
+          expanded ? "mt-[-21vh] sm:mt-[-36vh] " : ""
+        }  flex flex-row sm:flex-col bg-gray-300 opacity-80 transition-all duration-300 sm:h-[36vh] ease-out`}
       >
         <div
-          className="flex flex-col 
-         items-center w-1/2 py-[5vh] sm:py-0 xs:px-12 font-playfairDisplay sm:justify-center sm:w-full xs:h-[45vh]"
+          className="flex flex-col sm:flex-row sm:space-x-4
+         items-center w-1/2 py-[5vh] sm:py-0 font-playfairDisplay sm:justify-center sm:h-full sm:w-full"
         >
-          <h1 className="xs:hidden text-3xl">
-            {/* assign a string value based on returned integer of zero-index week array */}
+          <h1 className="text-3xl sm:text-5xl">
             {dayOfWeek == 6
               ? "Saturday"
               : dayOfWeek == 5
@@ -240,7 +222,7 @@ export default function Home() {
             ,
           </h1>
 
-          <p className="text-7xl md:text-6xl sm:text-5xl xs:text-sm">
+          <p className="text-7xl sm:text-5xl">
             {month == 11
               ? "December"
               : month == 10
@@ -268,20 +250,18 @@ export default function Home() {
           </p>
         </div>
 
-        {/* className=" xs:mx-0 sm:w-[33%] xs:text-4xl flex flex-col items-center border-l border-black w-1/4 mx-auto my-[4vh] font-playfairDisplay text-3xl" */}
-
         <div
           onMouseEnter={() => setFocusQuote(true)}
           onMouseLeave={() => setFocusQuote(false)}
-          className="xs:border-t xs:h-[41vh] xs:w-full xs:space-x-[12vw] xs:flex-row xs:border-l-0 flex flex-col items-center justify-center border-l border-black w-1/4 p-8 font-playfairDisplay text-3xl"
+          className="flex flex-col sm:flex-row items-center justify-center sm:justify-between border-l border-black sm:border-none w-[25%] sm:w-full sm:h-full font-playfairDisplay text-3xl"
         >
-          <h1 className="font-bold">Quote</h1>
+          <h1 className="sm:text-5xl sm:w-1/2 pt-8 sm:pt-0 sm:text-center font-semibold">Quote</h1>
 
           {/* quote visibility setter */}
 
           <div
             onClick={() => setQuoteVisible(!quoteVisible)}
-            className="flex flex-row py-[5vh] mb-0 hover:cursor-pointer hover:font-bold"
+            className="sm:w-1/2 flex flex-row py-[5vh] sm:mb-0 sm:py-0 sm:text-5xl items-center justify-center hover:cursor-pointer hover:font-semibold"
           >
             {!quoteVisible ? "Enabled" : "Disabled"}
           </div>
@@ -289,36 +269,31 @@ export default function Home() {
         <div
           onMouseEnter={() => setFocusQuote(true)}
           onMouseLeave={() => setFocusQuote(false)}
-          className="xs:text-3xl xs:border-t xs:border-l-0 xs:w-full xs:h-[20.5vh] flex flex-col items-center border-l border-black w-[25%] font-playfairDisplay text-3xl"
-        >
-          {/* quote placement selector for left, center and right */}
-          <div className="xs:hidden">
-            <div className="xs:mt-0 xs:w-screen xs:py-5 flex flex-col items-center mt-8">
-              <h1 className="font-bold">Quote Placement</h1>
-              <ul className="sm:gap-[1.3vw] md:gap-[1.3vw] flex flex-row py-[5vh] gap-[.8vw] xs:py-7">
+          className="flex flex-col sm:flex-row items-center  sm:border-none w-[25%] border-l border-black sm:w-full sm:h-full font-playfairDisplay text-3xl"
+        >  
+              <h1 className="font-semibold sm:w-1/2 sm:text-center sm:text-5xl pt-8 sm:pt-0">Placement</h1>
+              <ul className="sm:border-none h-full flex flex-row sm:w-1/2 py-[5vh] sm:py-0 gap-[.8vw] sm:gap-0 sm:justify-center sm:space-x-3">
                 <button
-                  className="hover:cursor-pointer hover:font-bold px-4"
+                  className="hover:cursor-pointer hover:font-semibold px-4 sm:p-0"
                   onClick={() => setQuotePosition("pr-[50%]")}
                 >
                   Left
                 </button>
-                <div className="border-l border-black " />
+                <div className="border-l border-black sm:border-none sm:hidden" />
                 <button
-                  className="hover:cursor-pointer hover:font-bold px-4"
+                  className="hover:cursor-pointer hover:font-semibold px-4 sm:p-0"
                   onClick={() => setQuotePosition("px-[25%]")}
                 >
                   Center
                 </button>
-                <div className="border-l border-black" />
+                <div className="border-l border-black sm:border-none sm:hidden"/>
                 <button
-                  className="hover:cursor-pointer hover:font-bold px-4"
+                  className="hover:cursor-pointer hover:font-semibold px-4 sm:p-0"
                   onClick={() => setQuotePosition("pl-[50%]")}
                 >
                   Right
                 </button>
-              </ul>
-            </div>
-          </div>
+              </ul> 
         </div>
       </div>
     </>

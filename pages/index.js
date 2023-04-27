@@ -126,7 +126,7 @@ export default function Home() {
                 : hours >= 12 && hours < 17
                 ? "Good afternoon"
                 : "Good evening"}
-              , it's
+              , it&apos;s
             </div>
 
             <Clock
